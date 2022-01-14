@@ -21,8 +21,10 @@
    min-height: 100vh;
 }
 
-.white{
+.game-title{
   color: white;
+  text-align: center;
+  padding-top: 30px;
 }
 
 .game-control{
@@ -32,6 +34,23 @@
 
 .game-control .item{
   height: 120px;
+}
+
+.game-control .item:not(:last-child){
+  margin-bottom: 3px;
+}
+
+.game-screen{
+  width: 100%;
+}
+.game-screen .item{
+  height: 180px;
+}
+.game-screen .item:nth-child(1){
+  margin-bottom: 10px;
+}
+.item{
+  border: dashed 1px ;
 }
 
 .auto-margin{

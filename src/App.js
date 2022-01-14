@@ -15,8 +15,11 @@ class App extends Component {
     let gamehelper = new GameHelper();
     this.state = {
       playState: PlayState.IDLE,
-      gameHelper: gamehelper.generateTiles(),
+      gameHelperState: gamehelper.generateTiles(),
+      tileRendering: false,
     };
+    this.onAnimateTilesEnd = this.onAnimateTilesEnd.bind(this);
+    this.onAnimateTilesStart = this.onAnimateTilesStart.bind(this);
   }
 
   gamePlayState(playState) {
@@ -25,25 +28,36 @@ class App extends Component {
 
   showScore() {
     let gmhlpr = new GameHelper();
-    this.setState(() => ({ gameHelper: gmhlpr.generateTiles(), playState: PlayState.ENDED }));
+    this.setState(() => ({ gameHelperState: gmhlpr.generateTiles(), playState: PlayState.ENDED }));
+  }
+
+  onAnimateTilesEnd() {
+    this.setState(() => ({
+      tileRendering: false
+    }));
+  }
+  onAnimateTilesStart() {
+    this.setState(() => ({
+      tileRendering: true
+    }));
   }
 
   render() {
     return (
       <div className="App" >
         <div className="container">
-          <div className="row white">
-            Game State : {this.state.playState.toString()}
-          </div>
+          <p className="game-title">
+            Spin Game
+          </p>
           <div className="row">
             <div className="offset-md-2 col-md-5 game-column">
               <Card className='game-card'>
-                <CardBody>
-                  <CardTitle tag="h5">
-                    <GameScreen
-                      gameState={this.state}
-                    />
-                  </CardTitle>
+                <CardBody tag="h5">
+                  <GameScreen
+                    onAnimateTilesStart={this.onAnimateTilesStart}
+                    onAnimateTilesEnd={this.onAnimateTilesEnd}
+                    gameState={this.state}
+                  />
                 </CardBody>
               </Card>
             </div>
@@ -53,6 +67,7 @@ class App extends Component {
 
                   <GameControl
                     gameState={this.state}
+                    animationIsRendering={this.state.playState === PlayState.RENDERING}
                     spin={() => this.gamePlayState(PlayState.PLAYING)}
                     stop={() => this.showScore(PlayState.ENDED)}
                   />
