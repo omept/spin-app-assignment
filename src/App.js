@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
 import './App.css';
 import GameControl from './components/GameControl';
 import GameScreen from './components/GameScreen';
-import PlayState from './utils/PlayState';
-import GameHelper from './utils/GameHelper';
-
-
-
+import PlayState, { Config } from './utils/PlayState';
+import { GameHelper } from './utils/Utils';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    let gamehelper = new GameHelper();
+    let gamehelper = new GameHelper(Config.GAME_TILES_CNT);
     this.state = {
       playState: PlayState.IDLE,
-      gameHelperState: gamehelper.generateTiles(),
+      gameHelperState: gamehelper.generateTiles(false),
       tileRendering: false,
     };
     this.onAnimateTilesEnd = this.onAnimateTilesEnd.bind(this);
@@ -23,11 +20,11 @@ class App extends Component {
   }
 
   gamePlayState(playState) {
-    this.setState({ playState })
+    this.setState(() => ({ playState }));
   }
 
   showScore() {
-    let gmhlpr = new GameHelper();
+    let gmhlpr = new GameHelper(Config.GAME_TILES_CNT);
     this.setState(() => ({ gameHelperState: gmhlpr.generateTiles(), playState: PlayState.ENDED }));
   }
 
@@ -48,6 +45,12 @@ class App extends Component {
         <div className="container">
           <p className="game-title">
             Spin Game
+          </p>
+          <p className="game-title-description">
+            <span> O = Orange  </span>
+            <span> S = Strawberry  </span>
+            <span> B = Banana  </span>
+            <span> M = Monkey  </span>
           </p>
           <div className="row">
             <div className="offset-md-2 col-md-5 game-column">

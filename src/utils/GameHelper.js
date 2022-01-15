@@ -1,6 +1,7 @@
 export default class GameHelper {
 
-    constructor() {
+    constructor(numberOfTiles) {
+        this.numberOfTiles = numberOfTiles;
         this.defaultTiles = this.defaultTiles.bind(this);
         this.generateTiles = this.generateTiles.bind(this);
         this.randomTile = this.randomTile.bind(this);
@@ -10,12 +11,11 @@ export default class GameHelper {
     defaultTiles = () => ["S", "B", "O", "M"]
 
     generateTiles = (withEvaluation = true) => {
-        let tiles = [
-            this.randomTile(),
-            this.randomTile(),
-            this.randomTile(),
-            this.randomTile(),
-        ];
+        let tiles = new Array(this.numberOfTiles);
+        for (let index = 0; index < tiles.length; index++) {
+            tiles[index] = this.randomTile();
+        }
+
 
         if (withEvaluation) {
             let { scoreDescription } = this.evaluateScore(tiles);
@@ -42,9 +42,9 @@ export default class GameHelper {
             let re2 = new RegExp(cond2, "g");
             const result1 = tileStr.match(re1);
             const result2 = tileStr.match(re2);
-            if (result1 != null && result1.length === 4) {
+            if (result1 != null && result1.length === tiles.length) {
                 headerText = "Winner";
-                bodyText = ` four consecutive symbols of ${tile}`;
+                bodyText = ` ${tiles.length} consecutive symbols of ${tile}`;
                 score = 100;
             } else if ((result2 != null)) {
                 /// Two consecutive symbols, then the prize is 20 dollars
@@ -58,7 +58,7 @@ export default class GameHelper {
                 score = 10;
             } else {
                 headerText = "Try Again";
-                bodyText = 'No matches';
+                bodyText = 'No matches found';
             }
             // console.log({ tileStr, result1, result2, score, tile });
         });

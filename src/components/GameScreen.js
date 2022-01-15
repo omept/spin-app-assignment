@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import PlayState from '../utils/PlayState';
+import PlayState, { Config } from '../utils/PlayState';
 import MessageBoard from './MessageBoard';
 
 
+function Tile(props) {
+    return (
+        <div className='tile'>
+            {props.tileValue}
+        </div>
+    );
+}
 
 
 function GameScreen(props) {
     let { gameState, onAnimateTilesEnd, onAnimateTilesStart } = props;
+    // console.log('gameState.gameHelperState');
+    // console.log(gameState.gameHelperState);
     let { tiles, scoreDescription } = gameState.gameHelperState;
     let [animationEnded, setAnimationEnded] = useState(false);
     let [animTiles, setAnimTiles] = useState([]);
@@ -20,6 +29,7 @@ function GameScreen(props) {
     let messageBoard = <MessageBoard scoreDescription={scoreDescription} gameState={gameState} />;
     let animateTile = (tiles) => {
         onAnimateTilesStart();
+        setAnimTiles([]);
         setAnimationEnded(false);
         let i = 0;
         let holdr = [];
@@ -28,7 +38,7 @@ function GameScreen(props) {
 
                 holdr.push(tiles[i]);
                 let newTiles = [...holdr];
-                if (i === 3) {
+                if (i === (tiles.length - 1)) {
                     i = 0;
                     holdr = [];
                     setAnimTiles(newTiles);
@@ -40,18 +50,27 @@ function GameScreen(props) {
                     i += 1;
                     setAnimTiles(newTiles);
                 }
+            } else {
+                clearInterval(intrvlDsply);
             }
-        }, 1000);
+        }, Config.TILE_DISPLAY_WAIT_TIME);
     }
 
+    let dfltTls = tiles.map((val, index) =>
+        <Tile tileValue={val} key={index} ></Tile>
+    );
+
+    let anmTls = animTiles.map((val, index) =>
+        <Tile tileValue={val} key={index} ></Tile>
+    );
 
     return (
         <div>
             <div className='container game-screen'>
                 <div className='row item'>
-                    <div className='col-md-12 auto-margin'>
-                        {gameState.playState === PlayState.IDLE ? tiles.toString() :
-                            gameState.playState === PlayState.ENDED ? animTiles.toString() : ''}
+                    <div className='col-md-12 auto-margin game-screen-tiles'>
+                        {gameState.playState === PlayState.IDLE ? dfltTls :
+                            gameState.playState === PlayState.ENDED ? anmTls : ''}
                     </div>
                 </div>
                 {animationEnded ? messageBoard : <div className='row'> </div>}

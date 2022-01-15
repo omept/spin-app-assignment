@@ -56,3 +56,22 @@
 .auto-margin{
   margin: auto;
 }
+.game-screen-tiles{
+  display: flex;
+    text-align: center;
+    justify-content: center;
+}
+.auto-margin .tile{
+  width: 40px;
+  border: darkseagreen dashed 1px;
+  margin: 0 2px;
+}
+
+.game-title-description{
+  color: white;
+}
+.game-title-description span{
+  border:  darkgoldenrod dashed 1px;
+  margin: 0 5px;
+  padding: 0 5px;
+}

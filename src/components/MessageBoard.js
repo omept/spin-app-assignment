@@ -14,7 +14,7 @@ function MessageBoard(props) {
                         {scoreDescription.body.toString()}
                     </div>
                     <div className='col-md-12 auto-margin'>
-                        {scoreDescription.score.toString()}
+                        Score : {scoreDescription.score.toString()}
                     </div>
                 </>
             ) : ''
