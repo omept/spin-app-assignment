@@ -3,10 +3,8 @@ import React, { Component } from 'react';
 class SecondsCountDown extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            from: this.props.from ?? 10,
-            text: this.props.from ?? 10
-        };
+        let from = this.props.from ?? 10;
+        this.state = { from, text: from };
     }
     componentDidMount() {
         this.timerID = setInterval(

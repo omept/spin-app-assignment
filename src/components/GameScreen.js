@@ -5,7 +5,7 @@ import MessageBoard from './MessageBoard';
 
 function Tile(props) {
     return (
-        <div className='tile'>
+        <div className='tile' data-testid="screenTile">
             {props.tileValue}
         </div>
     );
@@ -57,11 +57,11 @@ function GameScreen(props) {
     }
 
     let dfltTls = tiles.map((val, index) =>
-        <Tile tileValue={val} key={index} ></Tile>
+        <Tile tileValue={val} key={index}></Tile>
     );
 
     let anmTls = animTiles.map((val, index) =>
-        <Tile tileValue={val} key={index} ></Tile>
+        <Tile tileValue={val} key={index}></Tile>
     );
 
     return (

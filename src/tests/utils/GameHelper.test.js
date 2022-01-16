@@ -1,4 +1,4 @@
-import GameHelper from "./GameHelper";
+import { GameHelper } from "../../utils/Utils";
 
 describe('Game Helper test', () => {
     // All tile tests are for 1 x 3 tiles.
