@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/spin-app-assignment/static/css/main.d8e202d1.css",
+    "main.js": "/spin-app-assignment/static/js/main.03fcb666.js",
+    "static/js/787.00a10dc1.chunk.js": "/spin-app-assignment/static/js/787.00a10dc1.chunk.js",
+    "index.html": "/spin-app-assignment/index.html",
+    "main.d8e202d1.css.map": "/spin-app-assignment/static/css/main.d8e202d1.css.map",
+    "main.03fcb666.js.map": "/spin-app-assignment/static/js/main.03fcb666.js.map",
+    "787.00a10dc1.chunk.js.map": "/spin-app-assignment/static/js/787.00a10dc1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d8e202d1.css",
+    "static/js/main.03fcb666.js"
+  ]
+}
