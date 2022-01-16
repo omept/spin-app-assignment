@@ -14,8 +14,6 @@ function Tile(props) {
 
 function GameScreen(props) {
     let { gameState, onAnimateTilesEnd, onAnimateTilesStart } = props;
-    // console.log('gameState.gameHelperState');
-    // console.log(gameState.gameHelperState);
     let { tiles, scoreDescription } = gameState.gameHelperState;
     let [animationEnded, setAnimationEnded] = useState(false);
     let [animTiles, setAnimTiles] = useState([]);

@@ -45,6 +45,8 @@ class App extends Component {
         <div className="container">
           <p className="game-title">
             Spin Game
+            <br />
+            <a href="https://github.com/ong-gtp/spin-app-assignment" target="_blank" rel="noreferrer"> view code base </a>
           </p>
           <p className="game-title-description">
             <span> O = Orange  </span>
